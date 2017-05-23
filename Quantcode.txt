@@ -1,0 +1,9 @@
+##R For Quantitative Finance## 
+
+install.packages("forecast") install.packages("zoo") library(zoo) library(forecast) 
+hp <- read.zoo("C:/Directory/UKHP.csv", sep = ",",header = TRUE, format = "%Y-%m", FUN = as.yearmon)
+frequency(hp)
+hp_ret <- diff(hp) / lag(hp, k = -1) * 100 hp_ret
+mod <- auto.arima(hp_ret, stationary = TRUE, seasonal = FALSE,ic="aic") mod
+tsdiag(mod)
+plot(forecast(mod)) 
